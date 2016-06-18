@@ -13,14 +13,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        // make sure we seed a clean db
         DB::table('users')->truncate();
 
+        // our first user
         DB::table('users')->insert([
             'name'       => 'admin',
             'email'      => 'admin@adgate.com',
             'password'   => Hash::make('password'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+            'created_at' => Carbon::now()
         ]);
     }
 }

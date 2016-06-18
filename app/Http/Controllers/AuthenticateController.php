@@ -13,6 +13,7 @@ use App\User;
 class AuthenticateController extends Controller
 {
     public function __construct() {
+        // disable middleware since we need auth somewhere :)
         $this->middleware('jwt.auth', ['except' => ['authenticate']]);
     }
 

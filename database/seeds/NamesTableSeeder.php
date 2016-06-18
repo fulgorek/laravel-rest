@@ -13,12 +13,17 @@ class NamesTableSeeder extends Seeder
      */
     public function run()
     {
+        // make sure we seed a clean db
         DB::table('names')->truncate();
 
+        // we start our faker factory
         $faker = Faker\Factory::create();
         $limit = 100;
+
+        // we need to associate our previously user_id to our freshly created users...
         $user_id = DB::table('users')->first()->id;
 
+        // seed X users where created within this week
         for ($i = 0; $i < $limit; $i++) {
             DB::table('names')->insert([
                 'user_id'    => $user_id,

@@ -6,9 +6,10 @@ use App\Name;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+
+// we can search all our db, but logged user only can modify their own content
 
 class NameController extends Controller
 {

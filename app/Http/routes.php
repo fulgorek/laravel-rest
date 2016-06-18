@@ -11,17 +11,21 @@
 |
 */
 
-// main router
+// main site
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'api'], function() {
+// group our endpoints under api/v1
+Route::group(['prefix' => 'api/v1'], function() {
+
   // We need only post/authenticate to retrieve our token
   Route::post('authenticate', 'AuthenticateController@authenticate');
 
   // list of allowed methods
-  Route::resource('names', 'NameController', ['only' => [
+  Route::resource('names', 'NameController', [
+    'parameters' => ['names' => 'id'],
+    'only' => [
       'index', 'store', 'show', 'update', 'destroy'
-  ]]);
+    ]]);
 });
