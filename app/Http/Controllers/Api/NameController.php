@@ -50,7 +50,7 @@ class NameController extends Controller
           $name->last_name = $request->last_name;
           $name->save();
 
-          return response()->json(['saved' => true], 200);
+          return response()->json(['created' => true], 200);
         }
     }
 
@@ -99,12 +99,12 @@ class NameController extends Controller
         if ($validator->fails()) {
           return response()->json(['error' => $validator->errors()->all()], 400);
         } else {
-          $updated = false;
           $new_values = array(
             'first_name' => $request->input('first_name', $name['first_name']),
             'last_name' => $request->input('last_name', $name['last_name'])
           );
 
+          $updated = false;
           if ( count(array_diff($new_values, $name->getOriginal())) > 0 )
           {
             $name->first_name = $new_values['first_name'];
