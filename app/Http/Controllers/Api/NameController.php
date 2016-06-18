@@ -79,9 +79,7 @@ class NameController extends Controller
      */
     public function update(Request $request, $id) {
         $user = JWTAuth::parseToken()->authenticate();
-        $name = Name::where('user_id', $user->id);
-        $name = Name::find($id);
-
+        $name = Name::where('user_id', $user->id)->find($id);
 
         if ( is_null($name) )
         {
@@ -98,28 +96,23 @@ class NameController extends Controller
             'last_name' => 'between:2,30'
         ]);
 
-
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
           return response()->json(['error' => $validator->errors()->all()], 400);
         } else {
+          $updated = false;
+          $new_values = array(
+            'first_name' => $request->input('first_name', $name['first_name']),
+            'last_name' => $request->input('last_name', $name['last_name'])
+          );
 
-          // echo '<pre>';
-          // print_r ($name->getOriginal());
-          // echo '</pre>';
-
-          // echo '<pre>';
-          // print_r ($request->all());
-          // echo '</pre>';
-
-          $name = array_merge($name->getOriginal(), $request->all());
-
-          // $name->user_id = $user->id;
-          // $name->first_name = $request->first_name;
-          // $name->last_name = $request->last_name;
-
-          // $name->save();
-          return response()->json(['updated' => $name], 200);
+          if ( count(array_diff($new_values, $name->getOriginal())) > 0 )
+          {
+            $name->first_name = $new_values['first_name'];
+            $name->last_name = $new_values['last_name'];
+            $name->save();
+            $updated = true;
+          }
+          return response()->json(['updated' => $updated ], 200);
         }
     }
 
@@ -131,7 +124,8 @@ class NameController extends Controller
      */
     public function destroy($id)
     {
-      $name = Name::find($id);
+      $user = JWTAuth::parseToken()->authenticate();
+      $name = Name::where('user_id', $user->id)->find($id);
 
       if ( is_null($name) )
       {
