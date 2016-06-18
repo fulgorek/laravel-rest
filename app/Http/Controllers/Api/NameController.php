@@ -24,7 +24,9 @@ class NameController extends Controller
      */
     public function index()
     {
-      return Name::orderBy('id', 'desc')->select('id', 'first_name', 'last_name', 'created_at')->get();
+      return Name::orderBy('id', 'desc')
+        ->select('id', 'first_name', 'last_name', 'created_at')
+        ->paginate(20);
     }
 
     /**
