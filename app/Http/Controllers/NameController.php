@@ -10,7 +10,6 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 // we can search all our db, but logged user only can modify their own content
-
 class NameController extends Controller
 {
     public function __construct() {

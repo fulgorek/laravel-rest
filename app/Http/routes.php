@@ -20,7 +20,15 @@ Route::get('/', function () {
 Route::group(['prefix' => 'api/v1'], function() {
 
   // We need only post/authenticate to retrieve our token
-  Route::post('authenticate', 'AuthenticateController@authenticate');
+  Route::post('/auth/register', [
+    'as' => 'api.v1.auth.register',
+    'uses' => 'AuthenticateController@register'
+  ]);
+
+  Route::post('/auth/login', [
+    'as' => 'api.v1.auth.login',
+    'uses' => 'AuthenticateController@login'
+  ]);
 
   // list of allowed methods
   Route::resource('names', 'NameController', [
