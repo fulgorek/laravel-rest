@@ -4,16 +4,15 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class LoginRequest extends Request
-{
+class LoginRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return false;
+    public function authorize() {
+        return true;
     }
 
     /**
@@ -21,10 +20,10 @@ class LoginRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            //
+            'email' => 'required',
+            'password' => 'required'
         ];
     }
 }

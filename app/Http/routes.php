@@ -25,15 +25,16 @@ Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function() {
     'uses' => 'AuthController@register'
   ]);
 
-  // Route::post('/auth/login', [
-  //   'as' => 'auth.login',
-  //   'uses' => 'AuthController@login'
-  // ]);
+  // testing purposes not implemented in db
+  Route::post('/auth/login', [
+    'as' => 'auth.login',
+    'uses' => 'AuthController@login'
+  ]);
 
   // list of allowed methods
-  // Route::resource('names', 'NameController', [
-  //   'parameters' => ['names' => 'id'],
-  //   'only' => [
-  //     'index', 'store', 'show', 'update', 'destroy'
-  //   ]]);
+  Route::resource('names', 'NameController', [
+    'parameters' => ['names' => 'id'],
+    'only' => [
+      'index', 'store', 'show', 'update', 'destroy'
+    ]]);
 });
