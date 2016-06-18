@@ -13,10 +13,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        DB::table('users')->delete();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         $this->call(UsersTableSeeder::class);
+        $this->call(NamesTableSeeder::class);
 
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Model::reguard();
     }
 }
