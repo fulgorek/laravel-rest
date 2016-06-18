@@ -13,7 +13,7 @@
 
 // main site
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // group our endpoints under api/v1
