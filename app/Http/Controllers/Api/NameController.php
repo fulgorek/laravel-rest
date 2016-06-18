@@ -12,7 +12,8 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 // we can search all our db, but logged user only can modify their own content
 class NameController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('jwt.auth', ['except' => []]);
     }
 
@@ -38,7 +39,8 @@ class NameController extends Controller
             'last_name' => 'required|between:2,30'
         ]);
 
-        if ($validator->fails()) {
+        if ( $validator->fails() )
+        {
           return response()->json(['error' => $validator->errors()->all()], 401);
         } else {
           $user = JWTAuth::parseToken()->authenticate();
@@ -61,7 +63,8 @@ class NameController extends Controller
     public function show($id)
     {
       $name = Name::where('id', $id)->select('id', 'first_name', 'last_name', 'created_at')->get();
-      if ( is_null($name) ){
+      if ( is_null($name) )
+      {
         return response()->json(['error' => 'not_found'], 404);
       }
       return $name;
@@ -80,11 +83,13 @@ class NameController extends Controller
         $name = Name::find($id);
 
 
-        if ( is_null($name) ) {
+        if ( is_null($name) )
+        {
           return response()->json(['error' => 'not_found'], 404);
         }
 
-        if ( $name->user_id !== $user->id ) {
+        if ( $name->user_id !== $user->id )
+        {
           return response()->json(['error' => 'not_access'], 401);
         }
 
@@ -94,7 +99,8 @@ class NameController extends Controller
         ]);
 
 
-        if ($validator->fails()) {
+        if ($validator->fails())
+        {
           return response()->json(['error' => $validator->errors()->all()], 400);
         } else {
 
@@ -127,7 +133,8 @@ class NameController extends Controller
     {
       $name = Name::find($id);
 
-      if ( is_null($name) ) {
+      if ( is_null($name) )
+      {
         return response()->json(['error' => 'not_found'], 404);
       }
       $name->delete();

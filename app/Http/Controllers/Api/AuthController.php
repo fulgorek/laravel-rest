@@ -11,24 +11,27 @@ use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\JWTAuth;
 use JWTAuthException;
 
-class AuthController extends Controller {
-
+class AuthController extends Controller
+{
     private $user;
     private $jwtauth;
 
-    public function __construct(User $user, JWTAuth $jwtauth) {
+    public function __construct(User $user, JWTAuth $jwtauth)
+    {
         $this->user = $user;
         $this->jwtauth = $jwtauth;
     }
 
-    public function register(RegisterRequest $request) {
+    public function register(RegisterRequest $request)
+    {
         $newUser = $this->user->create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password'))
         ]);
 
-        if ($newUser === false) {
+        if ($newUser === false)
+        {
             return response()->json(['failed_to_create_new_user'], 500);
         }
 
@@ -37,13 +40,15 @@ class AuthController extends Controller {
         ]);
     }
 
-    public function login(LoginRequest $request) {
+    public function login(LoginRequest $request)
+    {
         $credentials = $request->only('email', 'password');
         $token = null;
 
         try {
             $token = $this->jwtauth->attempt($credentials);
-            if ($token === false) {
+            if ($token === false)
+            {
                 return response()->json(['invalid_credentials'], 422);
             }
         } catch (JWTAuthException $e) {
