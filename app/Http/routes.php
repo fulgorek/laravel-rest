@@ -19,7 +19,7 @@ Route::get('/', function () {
 // group our endpoints under api/v1
 Route::group(['prefix' => 'api/v1'], function() {
 
-  // We need only post/authenticate to retrieve our token
+  // register / login routes
   Route::post('/auth/register', [
     'as' => 'api.v1.auth.register',
     'uses' => 'AuthenticateController@register'
