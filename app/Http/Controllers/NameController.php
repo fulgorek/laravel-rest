@@ -47,6 +47,7 @@ class NameController extends Controller
           $name->first_name = $request->first_name;
           $name->last_name = $request->last_name;
           $name->save();
+
           return response()->json(['saved' => true], 200);
         }
     }
@@ -59,7 +60,6 @@ class NameController extends Controller
      */
     public function show($id)
     {
-
       $name = Name::where('id', $id)->select('id', 'first_name', 'last_name', 'created_at')->get();
       if ( is_null($name) ){
         return response()->json(['error' => 'not_found'], 404);
@@ -75,10 +75,17 @@ class NameController extends Controller
      * @return Response
      */
     public function update(Request $request, $id) {
+        $user = JWTAuth::parseToken()->authenticate();
+        $name = Name::where('user_id', $user->id);
         $name = Name::find($id);
+
 
         if ( is_null($name) ) {
           return response()->json(['error' => 'not_found'], 404);
+        }
+
+        if ( $name->user_id !== $user->id ) {
+          return response()->json(['error' => 'not_access'], 401);
         }
 
         $validator = Validator::make($request->all(), [
@@ -86,15 +93,27 @@ class NameController extends Controller
             'last_name' => 'between:2,30'
         ]);
 
+
         if ($validator->fails()) {
-          return response()->json(['error' => $validator->errors()->all()], 401);
+          return response()->json(['error' => $validator->errors()->all()], 400);
         } else {
-          $user = JWTAuth::parseToken()->authenticate();
-          $name->user_id = $user->id;
-          $name->first_name = $request->first_name;
-          $name->last_name = $request->last_name;
-          $name->save();
-          return response()->json(['updated' => true], 200);
+
+          // echo '<pre>';
+          // print_r ($name->getOriginal());
+          // echo '</pre>';
+
+          // echo '<pre>';
+          // print_r ($request->all());
+          // echo '</pre>';
+
+          $name = array_merge($name->getOriginal(), $request->all());
+
+          // $name->user_id = $user->id;
+          // $name->first_name = $request->first_name;
+          // $name->last_name = $request->last_name;
+
+          // $name->save();
+          return response()->json(['updated' => $name], 200);
         }
     }
 
