@@ -17,23 +17,23 @@ Route::get('/', function () {
 });
 
 // group our endpoints under api/v1
-Route::group(['prefix' => 'api/v1'], function() {
+Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function() {
 
   // register / login routes
   Route::post('/auth/register', [
-    'as' => 'api.v1.auth.register',
-    'uses' => 'AuthenticateController@register'
+    'as' => 'auth.register',
+    'uses' => 'AuthController@register'
   ]);
 
-  Route::post('/auth/login', [
-    'as' => 'api.v1.auth.login',
-    'uses' => 'AuthenticateController@login'
-  ]);
+  // Route::post('/auth/login', [
+  //   'as' => 'auth.login',
+  //   'uses' => 'AuthController@login'
+  // ]);
 
   // list of allowed methods
-  Route::resource('names', 'NameController', [
-    'parameters' => ['names' => 'id'],
-    'only' => [
-      'index', 'store', 'show', 'update', 'destroy'
-    ]]);
+  // Route::resource('names', 'NameController', [
+  //   'parameters' => ['names' => 'id'],
+  //   'only' => [
+  //     'index', 'store', 'show', 'update', 'destroy'
+  //   ]]);
 });
