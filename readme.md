@@ -7,12 +7,26 @@ Requirements
 
 ## Installation
 
-	composer install
+Install all dependencies
 
-	php artisan migrate
+```composer install```
 
-	php artisan db:seed
+Run database migrations
 
+```php artisan migrate```
+
+Seed the database
+
+```php artisan db:seed```
+
+
+## Notes:
+Default credentials
+
+Username: ```admin@site.com```
+
+Password: ```password```
+	
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
