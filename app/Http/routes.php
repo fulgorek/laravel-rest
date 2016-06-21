@@ -36,5 +36,11 @@ Route::group(['prefix' => 'api/v1', 'namespace' => 'Api'], function() {
     'parameters' => ['names' => 'id'],
     'only' => [
       'index', 'store', 'show', 'update', 'destroy'
-    ]]);
+  ]]);
+
 });
+
+Route::post('/datatables', [
+  'as' => 'datatables.data',
+  'uses' => 'DatatablesController@filter'
+]);

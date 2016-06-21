@@ -162,8 +162,8 @@ return [
         /*
          * Third Party Service Providers...
          */
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
-
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
 
@@ -216,7 +216,8 @@ return [
          * Third Party Service Providers...
          */
         'JWTAuth'   => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 
