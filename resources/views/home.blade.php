@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Dashboard Template for Adgate API</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -26,7 +26,6 @@
   </head>
 
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -36,7 +35,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">API</a>
+          <a class="navbar-brand" href="./">API</a>
         </div>
       </div>
     </nav>
@@ -45,7 +44,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="./">Overview <span class="sr-only">(current)</span></a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -59,41 +58,75 @@
               </div>
               <div class="form-group">
                 <label class="sr-only" for="exampleInputPassword3">Password</label>
-                <input type="text" name="password" class="form-control" id="exampleInputPassword3" placeholder="Password" value="password">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword3" placeholder="Password" value="password">
               </div>
               <button type="submit" class="btn btn-default">Sign in</button>
             </form>
           </div>
+
           <div class="form-group token" style="display:none;">
             <label class="" for="token">JWT Token</label>
             <input type="text" name="token" class="form-control" id="token" placeholder="token" onclick="this.focus();this.select()" readonly="readonly" style="cursor:text;">
           </div>
 
-          <h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
-            <table id="example" class="display" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Created</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Created</th>
-                            <th>Actions</th>
-                        </tr>
-                    </tfoot>
-                </table>
+          <div class="row data-list" style="display:none;">
+              <h2 class="sub-header">Names List</h2>
+              <div class="table-responsive">
+                <table id="example" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+              </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Add New Record</h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name"/>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name"/>
+                        </div>
+                      </div>
+                      <input type="hidden" name="id">
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap core JavaScript
