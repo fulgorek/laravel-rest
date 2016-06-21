@@ -54,7 +54,7 @@
             <form class="form-inline">
               <div class="form-group">
                 <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                <input type="email" name="email" class="form-control" id="exampleInputEmail3" placeholder="Email" value="admin@adgate.com">
+                <input type="email" name="email" class="form-control" id="exampleInputEmail3" placeholder="Email" value="admin@site.com">
               </div>
               <div class="form-group">
                 <label class="sr-only" for="exampleInputPassword3">Password</label>

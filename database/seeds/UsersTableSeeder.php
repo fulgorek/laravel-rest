@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         // our first user
         DB::table('users')->insert([
             'name'       => 'admin',
-            'email'      => 'admin@adgate.com',
+            'email'      => 'admin@site.com',
             'password'   => Hash::make('password'),
             'created_at' => Carbon::now()
         ]);
